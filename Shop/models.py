@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from PIL import Image
 
 
 # Create your models here.
@@ -28,7 +29,20 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
-    updated=models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.image)
+
+    def save(self):
+        if not self.image:
+            return
+        super(Product, self).save()
+        image = Image.open(self.image)
+        (width, height) = image.size
+        size = (80, 80)
+        image = image.resize(size, Image.ANTIALIAS)
+        image.save(self.image.path)
 
     class Meta:
         ordering = ('name', )

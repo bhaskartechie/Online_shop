@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Shop',
+    'Cart',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # 'my_preset1': {'width': 300, 'height': 220},
 # 'my_preset2': {'width': 100},
 # }
+
+CART_SESSION_ID = 'cart'
+
