@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import braintree
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -39,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Shop',
     'Cart',
-    'Orders'
+    'Orders',
+    'Payment',
 ]
 
 MIDDLEWARE = [
@@ -124,12 +128,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-# # IMAGEFIT_ROOT = "public"
-# IMAGEFIT_PRESETS = {
-# 'thumbnail': {'width': 64, 'height': 64, 'crop': True},
-# 'my_preset1': {'width': 300, 'height': 220},
-# 'my_preset2': {'width': 100},
-# }
 
 CART_SESSION_ID = 'cart'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Braintree settings
+BRAINTREE_MERCHANT_ID = '798bq33dhj9smv2k'
+BRAINTREE_PUBLIC_KEY = '2458ntmzdknxgrn2'
+BRAINTREE_PRIVATE_KEY = 'ccb6a75011cca1f2e74cf1288cdd244b'
+
+BRAINTREE_CONF = braintree.Configuration(braintree.Environment.Sandbox,
+                                         BRAINTREE_MERCHANT_ID,
+                                         BRAINTREE_PUBLIC_KEY,
+                                         BRAINTREE_PRIVATE_KEY)
