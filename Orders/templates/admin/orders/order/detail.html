@@ -29,7 +29,7 @@ Order {{ order.id }} {{ block.super }}
 </tr>
 <tr>
 <th>Total amount</th>
-    <td>${{ order.get_total_cost }}</td>
+    <td>&#8377;{{ order.get_total_cost }}</td>
 </tr>
 <tr>
 <th>Status</th>
@@ -52,14 +52,14 @@ Order {{ order.id }} {{ block.super }}
             {% for item in order.items.all %}
                 <tr class="row{% cycle "1" "2" %}">
                     <td>{{ item.product.name }}</td>
-                    <td class="num">${{ item.price }}</td>
+                    <td class="num">&#8377;{{ item.price }}</td>
                     <td class="num">{{ item.quantity }}</td>
-                    <td class="num">${{ item.get_cost }}</td>
+                    <td class="num">&#8377;{{ item.get_cost }}</td>
                 </tr>
             {% endfor %}
             <tr class="total">
                 <td colspan="3">Total</td>
-                <td class="num">${{ order.get_total_cost }}</td>
+                <td class="num">&#8377;{{ order.get_total_cost }}</td>
             </tr>
         </tbody>
     </table>
